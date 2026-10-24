@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Enterprise Portal - Employee Dashboard</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <!-- Top Navigation Bar -->
+  <header class="navbar">
+    <a href="dashboard.html" class="brand">
+      <span class="brand-badge">HCLTech</span>
+      <div>
+        <span class="brand-title">Employee Portal</span>
+        <span class="brand-subtitle">Enterprise Self-Service</span>
+      </div>
+    </a>
+
+    <nav class="nav-links">
+      <a href="dashboard.html" class="nav-link active" id="nav-dashboard" data-testid="nav-dashboard-link">Dashboard</a>
+      <a href="leave-management.html" class="nav-link" id="nav-leaves" data-testid="nav-leaves-link">Leave Management</a>
+
+      <div class="user-profile-badge">
+        <div class="user-avatar" id="user-avatar-initials" data-testid="user-avatar">SN</div>
+        <div class="user-info">
+          <div class="user-name" id="nav-user-name" data-testid="nav-user-name">Loading...</div>
+          <div class="user-role" id="nav-user-role" data-testid="nav-user-role">...</div>
+        </div>
+        <button id="btn-logout" class="btn btn-secondary btn-sm" data-testid="logout-btn">
+          Sign Out
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Main Content -->
+  <main class="container">
+    <!-- Feedback Alert -->
+    <div id="dashboard-alert" class="alert alert-info" role="alert" data-testid="dashboard-alert"></div>
+
+    <!-- Header Section -->
+    <div style="margin-bottom: 2rem; display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 1rem;">
+      <div>
+        <h1 style="font-size: 1.75rem; font-weight: 800; color: var(--primary);" id="welcome-heading" data-testid="welcome-heading">
+          Welcome back, <span id="header-user-name">Employee</span>
+        </h1>
+        <p style="color: var(--text-muted); font-size: 0.95rem;">
+          Access your employee profile, track leave quotas, and submit time-off requests.
+        </p>
+      </div>
+      <div>
+        <a href="leave-management.html" class="btn btn-primary" id="btn-quick-apply-leave" data-testid="quick-apply-leave-btn">
+          + Apply for Leave
+        </a>
+      </div>
+    </div>
+
+    <!-- Stat Widgets Grid -->
+    <div class="grid-3" style="margin-bottom: 2rem;">
+      <!-- Employee ID Card -->
+      <div class="stat-card" data-testid="stat-card-empid">
+        <div class="stat-icon primary">🆔</div>
+        <div class="stat-content">
+          <div class="stat-label">Employee ID</div>
+          <div class="stat-value" id="employee-id-val" data-testid="employee-id">...</div>
+        </div>
+      </div>
+
+      <!-- Department Card -->
+      <div class="stat-card" data-testid="stat-card-dept">
+        <div class="stat-icon warning">🏢</div>
+        <div class="stat-content">
+          <div class="stat-label">Department</div>
+          <div class="stat-value" style="font-size: 1.15rem;" id="employee-dept-val" data-testid="employee-department">...</div>
+        </div>
+      </div>
+
+      <!-- Leave Balance Card -->
+      <div class="stat-card" data-testid="stat-card-balance">
+        <div class="stat-icon success">📅</div>
+        <div class="stat-content">
+          <div class="stat-label">Available Leave Balance</div>
+          <div class="stat-value" id="leave-balance-val" data-testid="leave-balance-count">...</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Details and Recent Activity Grid -->
+    <div class="grid-2">
+      <!-- Profile Card -->
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">Employee Profile Details</h2>
+        </div>
+        <table class="table" data-testid="profile-details-table">
+          <tbody>
+            <tr>
+              <th style="width: 35%;">Full Name</th>
+              <td id="profile-name" data-testid="profile-name">...</td>
+            </tr>
+            <tr>
+              <th>Job Title / Designation</th>
+              <td id="profile-designation" data-testid="profile-designation">...</td>
+            </tr>
+            <tr>
+              <th>Corporate Email</th>
+              <td id="profile-email" data-testid="profile-email">...</td>
+            </tr>
+            <tr>
+              <th>Access Role</th>
+              <td id="profile-role" data-testid="profile-role">...</td>
+            </tr>
+            <tr>
+              <th>Joining Date</th>
+              <td id="profile-joindate" data-testid="profile-joindate">...</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Recent Leaves Summary -->
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">Recent Leave Requests</h2>
+          <a href="leave-management.html" style="font-size: 0.85rem; color: var(--primary); font-weight: 600; text-decoration: none;">View All →</a>
+        </div>
+        <div class="table-responsive">
+          <table class="table" id="recent-leaves-table" data-testid="recent-leaves-table">
+            <thead>
+              <tr>
+                <th>Type</th>
+                <th>Dates</th>
+                <th>Days</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="recent-leaves-body" data-testid="recent-leaves-body">
+              <tr>
+                <td colspan="4" style="text-align: center; color: var(--text-muted);">Loading recent requests...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <p>&copy; 2026 Enterprise Employee Portal | HCLTech Automation Testing Portfolio Project</p>
+  </footer>
+
+  <script src="js/dashboard.js"></script>
+</body>
+</html>

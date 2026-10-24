@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Enterprise Portal - Employee Login</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div class="auth-wrapper">
+    <div class="auth-card">
+      <div class="auth-header">
+        <div class="auth-logo" id="app-logo">HCLTech</div>
+        <h1 class="auth-title">Employee Self-Service</h1>
+        <p class="auth-subtitle">Sign in to your enterprise account</p>
+      </div>
+
+      <!-- Feedback Banner -->
+      <div id="alert-container" class="alert alert-danger" role="alert" data-testid="alert-message"></div>
+
+      <form id="login-form" novalidate>
+        <div class="form-group">
+          <label for="username" class="form-label">Username / Corporate ID</label>
+          <input 
+            type="text" 
+            id="username" 
+            name="username" 
+            class="form-control" 
+            placeholder="e.g. sathya.narayan" 
+            autocomplete="username"
+            data-testid="username-input"
+            required>
+          <div id="username-feedback" class="invalid-feedback" style="display:none;" data-testid="username-error"></div>
+        </div>
+
+        <div class="form-group">
+          <label for="password" class="form-label">Password</label>
+          <input 
+            type="password" 
+            id="password" 
+            name="password" 
+            class="form-control" 
+            placeholder="••••••••••••" 
+            autocomplete="current-password"
+            data-testid="password-input"
+            required>
+          <div id="password-feedback" class="invalid-feedback" style="display:none;" data-testid="password-error"></div>
+        </div>
+
+        <button type="submit" id="btn-login" class="btn btn-primary btn-block" data-testid="login-submit-btn">
+          Sign In
+        </button>
+      </form>
+
+      <!-- Synthetic Demonstration Credentials for Evaluators -->
+      <div class="demo-credentials-box">
+        <h4>Demo Demonstration Accounts</h4>
+        <div class="demo-user-badge">
+          <span>Employee: <strong>sathya.narayan</strong></span>
+          <span>Pass: <code>Password@123</code></span>
+        </div>
+        <div class="demo-user-badge">
+          <span>Manager: <strong>rajesh.kumar</strong></span>
+          <span>Pass: <code>Manager@123</code></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/auth.js"></script>
+</body>
+</html>

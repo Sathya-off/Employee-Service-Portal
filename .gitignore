@@ -1,0 +1,36 @@
+# Maven target & build files
+target/
+*.class
+
+# Logs
+*.log
+logs/
+
+# Test reports & screenshots
+test-output/
+allure-results/
+allure-report/
+screenshots/
+test-recordings/
+
+# IDE files
+.idea/
+*.iml
+.vscode/
+.settings/
+.project
+.classpath
+
+# Node.js dependencies
+node_modules/
+npm-debug.log*
+
+# OS specific files
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# Sensitive configuration files (passwords, tokens)
+*.env
+application-secret.properties
+credentials.json

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Enterprise Portal Smoke Test Suite" parallel="false">
+    <listeners>
+        <listener class-name="com.hcl.portal.listeners.TestListener" />
+    </listeners>
+
+    <test name="Smoke Sanity Verification">
+        <groups>
+            <run>
+                <include name="smoke" />
+            </run>
+        </groups>
+        <classes>
+            <class name="com.hcl.portal.ui.LoginTest" />
+            <class name="com.hcl.portal.ui.DashboardTest" />
+            <class name="com.hcl.portal.ui.LeaveManagementTest" />
+            <class name="com.hcl.portal.api.AuthApiTest" />
+            <class name="com.hcl.portal.api.EmployeeApiTest" />
+            <class name="com.hcl.portal.api.LeaveApiTest" />
+        </classes>
+    </test>
+</suite>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Enterprise Employee Portal Full Automation Suite" parallel="none" verbose="2">
+    <listeners>
+        <listener class-name="com.hcl.portal.listeners.TestListener" />
+    </listeners>
+
+    <test name="UI Authentication and Access Control Tests">
+        <classes>
+            <class name="com.hcl.portal.ui.LoginTest" />
+        </classes>
+    </test>
+
+    <test name="UI Employee Dashboard Tests">
+        <classes>
+            <class name="com.hcl.portal.ui.DashboardTest" />
+        </classes>
+    </test>
+
+    <test name="UI Leave Management Tests">
+        <classes>
+            <class name="com.hcl.portal.ui.LeaveManagementTest" />
+        </classes>
+    </test>
+
+    <test name="REST Assured API Tests">
+        <classes>
+            <class name="com.hcl.portal.api.AuthApiTest" />
+            <class name="com.hcl.portal.api.EmployeeApiTest" />
+            <class name="com.hcl.portal.api.LeaveApiTest" />
+        </classes>
+    </test>
+
+    <test name="Database and Data Persistence Validation Tests">
+        <classes>
+            <class name="com.hcl.portal.db.DatabaseValidationTest" />
+        </classes>
+    </test>
+
+    <test name="Cucumber BDD Feature Scenarios">
+        <classes>
+            <class name="com.hcl.portal.bdd.CucumberTestRunner" />
+        </classes>
+    </test>
+</suite>
