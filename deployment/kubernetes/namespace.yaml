@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: employee-portal-ns
+  labels:
+    app.kubernetes.io/name: employee-portal
+    app.kubernetes.io/part-of: hcltech-capstone

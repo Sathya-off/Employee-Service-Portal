@@ -1,0 +1,70 @@
+name: Enterprise Portal CI/CD Deployment & Test Automation
+
+on:
+  push:
+    branches: [ master, main ]
+  pull_request:
+    branches: [ master, main ]
+  workflow_dispatch:
+
+jobs:
+  build-deploy-test:
+    name: Build, Deploy & Automated Regression
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Java 21 LTS
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+          cache: maven
+
+      - name: Set up Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Start Employee Portal Application
+        working-directory: employee-portal-app/backend
+        run: |
+          nohup node server.js > app.log 2>&1 &
+          echo $! > app.pid
+          echo "Waiting for portal healthcheck..."
+          timeout 30 bash -c 'until curl -s http://localhost:8080/api/health | grep "UP"; do sleep 1; done'
+          echo "Portal application is UP and running on port 8080!"
+
+      - name: Execute Automated Regression Test Suite
+        working-directory: automation-testing-framework
+        run: |
+          mvn clean test -Dheadless=true
+
+      - name: Publish TestNG Test Results
+        uses: scacap/action-surefire-report@v1
+        if: always()
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          report_paths: 'automation-testing-framework/target/surefire-reports/testng-results.xml'
+
+      - name: Archive Test Reports & Artifacts
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: automation-test-reports
+          path: |
+            automation-testing-framework/target/surefire-reports/
+            automation-testing-framework/target/cucumber-reports/
+            automation-testing-framework/screenshots/
+            automation-testing-framework/logs/
+            employee-portal-app/backend/app.log
+
+      - name: Teardown Application
+        if: always()
+        working-directory: employee-portal-app/backend
+        run: |
+          if [ -f app.pid ]; then
+            kill $(cat app.pid) || true
+          fi

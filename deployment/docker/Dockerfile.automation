@@ -1,0 +1,50 @@
+# ========================================================
+# Dockerfile: Java Automation Testing Framework Container
+# Equipped with OpenJDK 21, Maven 3.9, and Headless Chrome
+# ========================================================
+
+FROM eclipse-temurin:21-jdk-jammy
+
+# Install system utilities, wget, gnupg, and Maven
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    wget \
+    gnupg \
+    curl \
+    unzip \
+    maven \
+    fonts-liberation \
+    libnss3 \
+    libxss1 \
+    libappindicator3-1 \
+    libasound2 \
+    xdg-utils \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install official stable Google Chrome
+RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | gpg --dearmor -o /usr/share/keyrings/google-chrome.gpg \
+    && echo "deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list \
+    && apt-get update \
+    && apt-get install -y --no-install-recommends google-chrome-stable \
+    && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /workspace
+
+# Copy Maven POM and pre-fetch dependencies for fast layered caching
+COPY automation-testing-framework/pom.xml ./
+RUN mvn dependency:go-offline -B || true
+
+# Copy framework source code and test suite definitions
+COPY automation-testing-framework/src ./src
+COPY automation-testing-framework/testng.xml ./
+COPY automation-testing-framework/testng-smoke.xml ./
+
+# Default environment configuration
+ENV BROWSER=chrome
+ENV HEADLESS=true
+ENV BASE_URL=http://portal-app:8080
+
+# Volumes to export test execution artifacts and screenshots to host machine
+VOLUME ["/workspace/target", "/workspace/screenshots", "/workspace/logs"]
+
+# Run the full regression test suite against target application
+CMD ["mvn", "test", "-DbaseUrl=http://portal-app:8080", "-Dheadless=true"]

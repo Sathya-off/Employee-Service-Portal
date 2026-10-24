@@ -1,0 +1,90 @@
+version: '3.8'
+
+# ========================================================
+# Docker Compose: Full-Stack Enterprise Deployment & Test
+# Orchestrates Portal App, Relational Database, and Automated Test Runner
+# ========================================================
+
+networks:
+  portal-net:
+    driver: bridge
+
+volumes:
+  mysql-data:
+  test-reports:
+  test-screenshots:
+
+services:
+  # ------------------------------------------------------
+  # Service 1: MySQL Database Server
+  # ------------------------------------------------------
+  portal-db:
+    image: mysql:8.0
+    container_name: portal-db
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: employee_portal
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+      - ../../employee-portal-app/backend/database/schema.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-proot"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - portal-net
+
+  # ------------------------------------------------------
+  # Service 2: System Under Test (Employee Portal Web App & API)
+  # ------------------------------------------------------
+  portal-app:
+    build:
+      context: ../../
+      dockerfile: deployment/docker/Dockerfile.app
+    container_name: portal-app
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    environment:
+      PORT: 8080
+      NODE_ENV: production
+      DB_HOST: portal-db
+    depends_on:
+      portal-db:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/api/health"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+      start_period: 5s
+    networks:
+      - portal-net
+
+  # ------------------------------------------------------
+  # Service 3: Automated Quality Engineering Test Runner
+  # Automatically triggers full multi-tier regression once App is HEALTHY
+  # ------------------------------------------------------
+  test-runner:
+    build:
+      context: ../../
+      dockerfile: deployment/docker/Dockerfile.automation
+    container_name: test-runner
+    environment:
+      BASE_URL: http://portal-app:8080
+      API_BASE_URL: http://portal-app:8080/api
+      BROWSER: chrome
+      HEADLESS: "true"
+    volumes:
+      - ../../automation-testing-framework/target/surefire-reports:/workspace/target/surefire-reports
+      - ../../automation-testing-framework/screenshots:/workspace/screenshots
+      - ../../automation-testing-framework/logs:/workspace/logs
+    depends_on:
+      portal-app:
+        condition: service_healthy
+    networks:
+      - portal-net

@@ -11,7 +11,7 @@
       "department": "Quality Engineering & Testing",
       "designation": "Associate Test Engineer",
       "role": "EMPLOYEE",
-      "leaveBalance": 16,
+      "leaveBalance": 18,
       "joinDate": "2024-06-15"
     },
     {
@@ -51,10 +51,10 @@
       "endDate": "2026-10-29",
       "days": 2,
       "reason": "Routine medical checkup",
-      "status": "APPROVED",
+      "status": "PENDING",
       "appliedAt": "2026-10-24T08:00:00.000Z",
-      "reviewedBy": "HCL10051",
-      "remarks": "Approved during API automated verification"
+      "reviewedBy": null,
+      "remarks": null
     },
     {
       "id": 3,
@@ -65,7 +65,7 @@
       "days": 2,
       "reason": "Attending automation engineering symposium",
       "status": "PENDING",
-      "appliedAt": "2026-10-24T09:17:44.762Z",
+      "appliedAt": "2026-10-24T09:27:23.833Z",
       "reviewedBy": null,
       "remarks": null
     },
@@ -78,88 +78,39 @@
       "days": 3,
       "reason": "Year-end annual testing workshop",
       "status": "PENDING",
-      "appliedAt": "2026-10-24T09:17:52.092Z",
-      "reviewedBy": null,
-      "remarks": null
-    },
-    {
-      "id": 5,
-      "employeeId": "HCL10482",
-      "leaveType": "EARNED",
-      "startDate": "2026-12-28",
-      "endDate": "2026-12-30",
-      "days": 3,
-      "reason": "Database cross-layer integrity verification",
-      "status": "PENDING",
-      "appliedAt": "2026-10-24T09:17:52.387Z",
+      "appliedAt": "2026-10-24T09:27:25.170Z",
       "reviewedBy": null,
       "remarks": null
     }
   ],
   "activeTokens": {
-    "495ea497828d9001756ee6dffa19dd45640670b972529602aa98568594019000": {
+    "1d7eb622de7ef7899abc99120da985c619f07eb9ce89adc6d9241b8f974091f9": {
       "employeeId": "HCL10482",
-      "expiresAt": 1792862247256
+      "expiresAt": 1792862837385
     },
-    "e1ac9c529dc453aaa31379f507007914e98c3f5d28f847a3cc3aaae15fcefda7": {
+    "77bd46275170b81ce6f4b7120804915e1791e528ab0dc2cf36aa8c1e267b5168": {
       "employeeId": "HCL10482",
-      "expiresAt": 1792862256220
+      "expiresAt": 1792862841449
     },
-    "5ceaa7c48d2a1dc36630a90de2fbc489f4150ef1de2cef1007c55729673f3fe8": {
+    "4cb82fb77a588791dfc7b92c28e7ab27dbbc4598853ccbb37cb43f3293331823": {
       "employeeId": "HCL10482",
-      "expiresAt": 1792862257681
+      "expiresAt": 1792862843184
     },
-    "e8d2b8b23a1374bcb3c30f1a29a847860db895deec3d1818fa6135b827ff36cf": {
+    "471355fb827befee4d437211cb5ba2773a1f6ae9c8ea3cac66c2cf71d40ce212": {
       "employeeId": "HCL10482",
-      "expiresAt": 1792862259178
+      "expiresAt": 1792862844338
     },
-    "b44ec3f2f81cb483a10672bbc56a3491941a6c4df9f2eb48b282b9eaa6876e05": {
+    "d8b2c3a39ccfe1edb44d306210723f959ddf61b94fcdee53c2c466c87b60d7d5": {
       "employeeId": "HCL10482",
-      "expiresAt": 1792862260750
+      "expiresAt": 1792862845040
     },
-    "0d7e42565a78152ca9f4387b90b86b34939edfa2f1ffc865a60f0232dc9225a0": {
+    "500a86391fa58e88e623e0ecae7147409794194deea7bb5556b2da12d790103d": {
       "employeeId": "HCL10482",
-      "expiresAt": 1792862262367
+      "expiresAt": 1792862845123
     },
-    "0e6ba773f61235d7c63378cf973b7ac97988477d7bee65fddb5d0a4548e460b0": {
-      "employeeId": "HCL10482",
-      "expiresAt": 1792862263740
-    },
-    "954daea5fc0e9c06b3bfc19a00eeeae8afc90b4945d7d7d45dcd0a8534223331": {
-      "employeeId": "HCL10482",
-      "expiresAt": 1792862266209
-    },
-    "7d66e7222601bb31d18ac89077ca0ce910d29698f41e1bfadee9a1ce330cf795": {
-      "employeeId": "HCL10482",
-      "expiresAt": 1792862268380
-    },
-    "58e587083c51de9e868986891b9a37e72bf5f763cdaa474b9d9a3c7cb32a9067": {
-      "employeeId": "HCL10482",
-      "expiresAt": 1792862269957
-    },
-    "49645d0f5170a4903ef1b8aca3c1e6b5bc1c3508a5678220cef7914de9bb883b": {
-      "employeeId": "HCL10482",
-      "expiresAt": 1792862271133
-    },
-    "bd0d9b1e3bb1e8fa7d31cc9260cdfe86515f7de13dabe542f07c049a101da972": {
-      "employeeId": "HCL10482",
-      "expiresAt": 1792862271824
-    },
-    "574f07b86c538090a6a6a24cfcc771f0666fc811a860b3f14955dbd44537e4e2": {
-      "employeeId": "HCL10482",
-      "expiresAt": 1792862272036
-    },
-    "58f06c2e1fc45fc1d0752fb244601e04267d149107b058e6a50c364b34f3837a": {
+    "3ec32837a3c03989b36805dcb766d8596cdcf22ba9a430d9e03c07409b638dc0": {
       "employeeId": "HCL10051",
-      "expiresAt": 1792862272059
-    },
-    "439801a944d8c214ff8b626e830695087578ada0713572e90f902c9664468fbf": {
-      "employeeId": "HCL10482",
-      "expiresAt": 1792862272235
-    },
-    "9914cbc3b1ff8df2b248196c2e0729e731ebcedd222c31a6d06eaff2f0f827c8": {
-      "employeeId": "HCL10482",
-      "expiresAt": 1792862274035
+      "expiresAt": 1792862845149
     }
   }
 }

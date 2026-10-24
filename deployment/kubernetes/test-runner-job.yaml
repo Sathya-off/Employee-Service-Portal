@@ -1,0 +1,32 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: regression-test-runner-job
+  namespace: employee-portal-ns
+spec:
+  ttlSecondsAfterFinished: 600
+  backoffLimit: 1
+  template:
+    metadata:
+      labels:
+        job: test-runner
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: test-runner
+          image: automation-test-runner:latest
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: BASE_URL
+              value: "http://portal-service.employee-portal-ns.svc.cluster.local:8080"
+            - name: HEADLESS
+              value: "true"
+            - name: BROWSER
+              value: "chrome"
+          resources:
+            requests:
+              cpu: "500m"
+              memory: "512Mi"
+            limits:
+              cpu: "1000m"
+              memory: "1024Mi"

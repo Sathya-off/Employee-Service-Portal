@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: portal-app-deployment
+  namespace: employee-portal-ns
+  labels:
+    app: portal-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: portal-app
+  template:
+    metadata:
+      labels:
+        app: portal-app
+    spec:
+      containers:
+        - name: portal-app
+          image: employee-portal-app:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080
+          envFrom:
+            - configMapRef:
+                name: portal-config
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "500m"
+              memory: "256Mi"
+          # Liveness probe to restart crashed containers
+          livenessProbe:
+            httpGet:
+              path: /api/health
+              port: 8080
+            initialDelaySeconds: 15
+            periodSeconds: 10
+          # Readiness probe before admitting traffic
+          readinessProbe:
+            httpGet:
+              path: /api/health
+              port: 8080
+            initialDelaySeconds: 5
+            periodSeconds: 5
